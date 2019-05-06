@@ -17,13 +17,23 @@ interface ConvertResult {
 
 class TweetHandler {
   text: string = ""
+  mediaURLs: string[] = []
   urls: string[] = []
   linkedTwitterUser: string | null = null
+  embeddedTweet: { url?: string } | null = null
 
   onopentag(name: string, attrs: { [key: string]: string }) {
     switch (name) {
       case "a":
         if (attrs.href) {
+          if (this.embeddedTweet) {
+            if (!attrs.href.startsWith("https://twitter.com")) {
+              return
+            }
+
+            this.embeddedTweet.url = attrs.href.replace(/(.*)\?.*$/, "$1")
+            return
+          }
           const twitterUser = getTwitterUsername(attrs.href)
           if (twitterUser) {
             this.linkedTwitterUser = twitterUser
@@ -33,13 +43,22 @@ class TweetHandler {
         }
         break
       case "blockquote":
-        this.text += "“"
+        if (attrs.class === "twitter-tweet") {
+          this.embeddedTweet = {}
+        } else {
+          this.text += "“"
+        }
+        break
+      case "img":
+        if (attrs.src) {
+          this.mediaURLs.push(attrs.src)
+        }
         break
     }
   }
 
   ontext(text: string) {
-    if (this.linkedTwitterUser) {
+    if (this.linkedTwitterUser || this.embeddedTweet) {
       return
     }
 
@@ -61,12 +80,20 @@ class TweetHandler {
         }
         break
       case "blockquote":
-        this.text += "”"
+        if (this.embeddedTweet) {
+          if (this.embeddedTweet.url) {
+            this.urls.push(this.embeddedTweet.url)
+          }
+          this.embeddedTweet = null
+        } else {
+          this.text += "”"
+        }
         break
     }
   }
 
   onend() {
+    this.text = this.text.trim()
     this.text += ` ${this.urls.join(" ")}`
     this.text = this.text.trim()
   }
@@ -74,7 +101,7 @@ class TweetHandler {
   get result(): ConvertResult {
     return {
       text: this.text,
-      mediaURLs: [],
+      mediaURLs: this.mediaURLs,
     }
   }
 }
