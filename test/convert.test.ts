@@ -78,6 +78,26 @@ const scenarios: any[][] = [
     "And I’m sitting here with two level 117 characters. https://twitter.com/Warcraft/status/1042485327267422208",
     [],
   ],
+  [
+    "collapsing spacing",
+    `
+    <p>Spicy jalapeno meatloaf shoulder sirloin, cow frankfurter tail pork belly
+    leberkas brisket chuck pancetta bresaola. Shankle chuck rump kielbasa burgdoggen.
+    Filet mignon turkey doner t-bone bresaola, ribeye biltong. Shank biltong kevin
+    pork pancetta frankfurter, turkey tongue pork loin doner turducken drumstick
+    jerky boudin t-bone.</p>
+
+    <p>Pancetta shank boudin, tail corned beef tenderloin kevin buffalo sausage
+    tri-tip. T-bone landjaeger porchetta corned beef. Spare ribs strip steak bresaola
+    ham pancetta prosciutto. T-bone turkey fatback, turducken pork pig cow jerky
+    short loin ball tip. Boudin ball tip brisket, shankle chuck ham frankfurter
+    hamburger buffalo landjaeger.</p>
+    `,
+    `Spicy jalapeno meatloaf shoulder sirloin, cow frankfurter tail pork belly leberkas brisket chuck pancetta bresaola. Shankle chuck rump kielbasa burgdoggen. Filet mignon turkey doner t-bone bresaola, ribeye biltong. Shank biltong kevin pork pancetta frankfurter, turkey tongue pork loin doner turducken drumstick jerky boudin t-bone.
+
+Pancetta shank boudin, tail corned beef tenderloin kevin buffalo sausage tri-tip. T-bone landjaeger porchetta corned beef. Spare ribs strip steak bresaola ham pancetta prosciutto. T-bone turkey fatback, turducken pork pig cow jerky short loin ball tip. Boudin ball tip brisket, shankle chuck ham frankfurter hamburger buffalo landjaeger.`,
+    [],
+  ],
 ]
 
 test.each(scenarios)("converts %s", (_desc, input, output, mediaUrls) => {

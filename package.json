@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@types/htmlparser2": "^3.10.0",
-    "htmlparser2": "^3.10.1"
+    "@types/twitter-text": "^2.0.0",
+    "htmlparser2": "^3.10.1",
+    "twitter-text": "^3.0.0"
   }
 }

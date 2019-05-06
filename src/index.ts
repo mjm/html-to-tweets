@@ -1,4 +1,5 @@
 import convert from "./convert"
+import split from "./split"
 
 interface TranslateInput {
   title: string | null
@@ -6,12 +7,12 @@ interface TranslateInput {
   html: string
 }
 
-interface TranslatedTweet {
+export interface Tweet {
   body: string
   mediaURLs: string[]
 }
 
-function translate(input: TranslateInput): TranslatedTweet[] {
+function translate(input: TranslateInput): Tweet[] {
   if (input.title) {
     return [
       {
@@ -22,7 +23,7 @@ function translate(input: TranslateInput): TranslatedTweet[] {
   }
 
   const result = convert(input.html)
-  return [result]
+  return split(result)
 }
 
 export default translate

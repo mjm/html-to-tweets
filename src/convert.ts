@@ -10,7 +10,9 @@ function convert(html: string): ConvertResult {
   return handler.result
 }
 
-interface ConvertResult {
+export default convert
+
+export interface ConvertResult {
   body: string
   mediaURLs: string[]
 }
@@ -62,7 +64,8 @@ class TweetHandler {
       return
     }
 
-    this.text += text
+    // collapse all whitespace to a single space
+    this.text += text.replace(/\s+/g, " ")
   }
 
   onclosetag(name: string) {
@@ -95,7 +98,10 @@ class TweetHandler {
   onend() {
     this.text = this.text.trim()
     this.text += ` ${this.urls.join(" ")}`
-    this.text = this.text.trim()
+    this.text = this.text
+      .split("\n")
+      .map(l => l.trim())
+      .join("\n")
   }
 
   get result(): ConvertResult {
@@ -118,5 +124,3 @@ function getTwitterUsername(url: string): null | string {
 
   return match[1]
 }
-
-export default convert

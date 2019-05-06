@@ -1,3 +1,4 @@
 {
-  "jest.pathToJest": "npm test --"
+  "jest.pathToJest": "npm test --",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
