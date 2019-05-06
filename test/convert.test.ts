@@ -82,6 +82,6 @@ const scenarios: any[][] = [
 
 test.each(scenarios)("converts %s", (_desc, input, output, mediaUrls) => {
   const result = convert(input)
-  expect(result.text).toEqual(output)
+  expect(result.body).toEqual(output)
   expect(result.mediaURLs).toEqual(mediaUrls)
 })

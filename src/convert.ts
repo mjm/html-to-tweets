@@ -11,7 +11,7 @@ function convert(html: string): ConvertResult {
 }
 
 interface ConvertResult {
-  text: string
+  body: string
   mediaURLs: string[]
 }
 
@@ -100,7 +100,7 @@ class TweetHandler {
 
   get result(): ConvertResult {
     return {
-      text: this.text,
+      body: this.text,
       mediaURLs: this.mediaURLs,
     }
   }

@@ -21,8 +21,8 @@ function translate(input: TranslateInput): TranslatedTweet[] {
     ]
   }
 
-  const { text: body, mediaURLs } = convert(input.html)
-  return [{ body, mediaURLs }]
+  const result = convert(input.html)
+  return [result]
 }
 
 export default translate
