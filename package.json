@@ -1,9 +1,9 @@
 {
-  "name": "courier-translator",
+  "name": "html-to-tweets",
   "version": "0.1.0",
   "main": "dist/index.js",
-  "umd:main": "dist/courier-translator.umd.production.js",
-  "module": "dist/courier-translator.es.production.js",
+  "umd:main": "dist/html-to-tweets.umd.production.js",
+  "module": "dist/html-to-tweets.es.production.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
