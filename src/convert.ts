@@ -1,6 +1,6 @@
 import * as htmlparser from "htmlparser2"
 
-function convert(html: string): ConvertResult {
+export function convert(html: string): ConvertResult {
   const handler = new TweetHandler()
 
   const parser = new htmlparser.Parser(handler as any, { decodeEntities: true })
@@ -9,8 +9,6 @@ function convert(html: string): ConvertResult {
 
   return handler.result
 }
-
-export default convert
 
 export interface ConvertResult {
   body: string

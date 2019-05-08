@@ -1,4 +1,4 @@
-import translate from "../src"
+import { translate } from "../src"
 
 test("translates titled post", () => {
   const input = {

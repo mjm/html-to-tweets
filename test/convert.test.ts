@@ -1,4 +1,4 @@
-import convert from "../src/convert"
+import { convert } from "../src/convert"
 
 const scenarios: any[][] = [
   ["an empty string", "", "", []],

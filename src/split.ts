@@ -2,15 +2,13 @@ import { parseTweet, ParsedTweet } from "twitter-text"
 import { Tweet } from "./"
 import { ConvertResult } from "./convert"
 
-function split(input: ConvertResult): Tweet[] {
+export function split(input: ConvertResult): Tweet[] {
   const [first, ...rest] = numberTweets(splitTweets(input.body))
   return [
     { body: first, mediaURLs: input.mediaURLs },
     ...rest.map(t => ({ body: t, mediaURLs: [] })),
   ]
 }
-
-export default split
 
 function splitTweets(text: string, tweets: string[] = []): string[] {
   const [first, rest] = splitOnce(text)

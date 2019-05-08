@@ -1,4 +1,4 @@
-import split from "../src/split"
+import { split } from "../src/split"
 
 test("does not split if tweet is short enough", () => {
   const input = {
