@@ -1,27 +1,37 @@
-# TSDX Bootstrap
+# html-to-tweets
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+A simple, opinionated translator from HTML microblog post to tweets for posting on Twitter.
 
-## Local Development
+## Installation
 
-Below is a list of commands you will probably find useful.
+```
+npm install html-to-tweets
+```
 
-### `npm start` or `yarn start`
+## Usage
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
+```javascript
+const { translate } = require("html-to-tweets")
 
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
+// Posts with titles and URLs turn into small link posts
+const titledPost = {
+  title: "My Blog Post",
+  url: "https://example.com/my-blog-post/",
+  html: "<p>If only I had something to say...</p>",
+}
+translate(titledPost)
+// => [ { body: 'My Blog Post https://example.com/my-blog-post/', mediaURLs: [] } ]
 
-Your library will be rebuilt if you make edits.
-
-### `npm run build` or `yarn build`
-
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
-
-### `npm test` or `yarn test`
-
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
+// Untitled posts get their content reformatted for Twitter
+const untitledPost = {
+  title: "", // title can also be omitted
+  url: "https://example.com/another-post/",
+  html: `
+<p>This post was <em>translated for Twitter</em> by
+<a href="https://github.com/mjm/html-to-tweets">html-to-tweets</a>.
+</p>
+`,
+}
+translate(untitledPost)
+// => [ { body: 'This post was translated for Twitter by html-to-tweets https://github.com/mjm/html-to-tweets', mediaURLs: [] } ]
+```
