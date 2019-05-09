@@ -1,5 +1,9 @@
 # html-to-tweets
 
+[![npm version](https://img.shields.io/npm/v/html-to-tweets.svg)](https://npm.im/html-to-tweets)
+[![CircleCI](https://img.shields.io/circleci/project/github/mjm/html-to-tweets/master.svg)](https://circleci.com/gh/mjm/html-to-tweets)
+![ISC License](https://img.shields.io/npm/l/html-to-tweets.svg)
+
 A simple, opinionated translator from HTML microblog post to tweets for posting on Twitter.
 
 ## Installation
