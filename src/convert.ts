@@ -1,7 +1,15 @@
 import * as htmlparser from "htmlparser2"
+import { URL } from "url"
 
-export function convert(html: string): ConvertResult {
-  const handler = new TweetHandler()
+export interface ConvertOptions {
+  baseURL?: string
+}
+
+export function convert(
+  html: string,
+  options: ConvertOptions = {}
+): ConvertResult {
+  const handler = new TweetHandler(options)
 
   const parser = new htmlparser.Parser(handler as any, { decodeEntities: true })
   parser.write(html)
@@ -16,11 +24,16 @@ export interface ConvertResult {
 }
 
 class TweetHandler {
+  options: ConvertOptions
   text: string = ""
   mediaURLs: string[] = []
   urls: string[] = []
   linkedTwitterUser: string | null = null
   embeddedTweet: { url?: string } | null = null
+
+  constructor(options: ConvertOptions) {
+    this.options = options
+  }
 
   onopentag(name: string, attrs: { [key: string]: string }) {
     switch (name) {
@@ -38,7 +51,7 @@ class TweetHandler {
           if (twitterUser) {
             this.linkedTwitterUser = twitterUser
           } else {
-            this.urls.push(attrs.href)
+            this.addURL(attrs.href)
           }
         }
         break
@@ -51,7 +64,7 @@ class TweetHandler {
         break
       case "img":
         if (attrs.src) {
-          this.mediaURLs.push(attrs.src)
+          this.addMediaURL(attrs.src)
         }
         break
     }
@@ -83,7 +96,7 @@ class TweetHandler {
       case "blockquote":
         if (this.embeddedTweet) {
           if (this.embeddedTweet.url) {
-            this.urls.push(this.embeddedTweet.url)
+            this.addURL(this.embeddedTweet.url)
           }
           this.embeddedTweet = null
         } else {
@@ -107,6 +120,18 @@ class TweetHandler {
       body: this.text,
       mediaURLs: this.mediaURLs,
     }
+  }
+
+  private addURL(url: string) {
+    this.urls.push(this.fixURL(url))
+  }
+
+  private addMediaURL(url: string) {
+    this.mediaURLs.push(this.fixURL(url))
+  }
+
+  private fixURL(url: string): string {
+    return new URL(url, this.options.baseURL).toString()
   }
 }
 

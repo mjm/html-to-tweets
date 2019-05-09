@@ -22,6 +22,6 @@ export function translate(input: TranslateInput): Tweet[] {
     ]
   }
 
-  const result = convert(input.html)
+  const result = convert(input.html, { baseURL: input.url })
   return split(result)
 }

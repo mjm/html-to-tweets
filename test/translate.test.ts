@@ -33,7 +33,7 @@ test("translates a microblog post with images", () => {
     title: "",
     url: "https://example.com/abc/",
     html:
-      '<p>This is a tweet with media.</p><figure><img src="https://example.com/foo.jpg"></figure>',
+      '<p>This is a tweet with media.</p><figure><img src="/foo.jpg"></figure>',
   }
   expect(translate(input)).toEqual([
     {

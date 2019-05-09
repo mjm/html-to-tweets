@@ -105,3 +105,17 @@ test.each(scenarios)("converts %s", (_desc, input, output, mediaUrls) => {
   expect(result.body).toEqual(output)
   expect(result.mediaURLs).toEqual(mediaUrls)
 })
+
+test("uses base URL for relative media and link URLs", () => {
+  const input = `
+  <p>This is <a href="/foo/bar">a relative link</a>.</p>
+  <figure><img src="/baz.jpg"></figure>`
+  const result = convert(input, {
+    baseURL: "https://example.org/2019/foo-bar-baz/",
+  })
+
+  expect(result.body).toEqual(
+    "This is a relative link. https://example.org/foo/bar"
+  )
+  expect(result.mediaURLs).toEqual(["https://example.org/baz.jpg"])
+})
