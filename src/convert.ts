@@ -67,6 +67,14 @@ class TweetHandler {
           this.addMediaURL(attrs.src)
         }
         break
+      case "iframe":
+        if (attrs.src) {
+          const youtubeURL = getYoutubeLink(attrs.src)
+          if (youtubeURL) {
+            this.addURL(youtubeURL)
+          }
+        }
+        break
     }
   }
 
@@ -146,4 +154,18 @@ function getTwitterUsername(url: string): null | string {
   }
 
   return match[1]
+}
+
+const youtubeRegex = new RegExp(
+  "^https://www.youtube.com/embed/([A-Za-z0-9_]+)"
+)
+
+function getYoutubeLink(url: string): null | string {
+  const match = url.match(youtubeRegex)
+  if (!match) {
+    return null
+  }
+
+  const videoID = match[1]
+  return `https://www.youtube.com/watch?v=${videoID}`
 }

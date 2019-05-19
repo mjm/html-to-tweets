@@ -79,6 +79,13 @@ const scenarios: any[][] = [
     [],
   ],
   [
+    "embedded YouTube videos to URLs",
+    `<p>I think the Sims 4 episode of Monster Factory is my favorite of them all. Watching this just brings me so much joy.</p>
+    <p><iframe width="480" height="270" src="https://www.youtube.com/embed/TamwFUUd9Yk?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>`,
+    "I think the Sims 4 episode of Monster Factory is my favorite of them all. Watching this just brings me so much joy. https://www.youtube.com/watch?v=TamwFUUd9Yk",
+    [],
+  ],
+  [
     "collapsing spacing",
     `
     <p>Spicy jalapeno meatloaf shoulder sirloin, cow frankfurter tail pork belly
