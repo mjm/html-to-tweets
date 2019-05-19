@@ -105,6 +105,44 @@ const scenarios: any[][] = [
 Pancetta shank boudin, tail corned beef tenderloin kevin buffalo sausage tri-tip. T-bone landjaeger porchetta corned beef. Spare ribs strip steak bresaola ham pancetta prosciutto. T-bone turkey fatback, turducken pork pig cow jerky short loin ball tip. Boudin ball tip brisket, shankle chuck ham frankfurter hamburger buffalo landjaeger.`,
     [],
   ],
+  [
+    "unordered lists to Unicode bullets",
+    `<p>This is a list of things:</p>
+    <ul>
+    <li>This is the first thing</li>
+    <li>This is the second thing</li>
+    <li>This is the third thing</li>
+    </ul>
+    <p>And this is the rest.</p>`,
+    `This is a list of things:
+
+• This is the first thing
+• This is the second thing
+• This is the third thing
+
+And this is the rest.`,
+    [],
+  ],
+  [
+    "ordered lists to numbered lines",
+    `<p>This is a list of things:</p>
+    <ol>
+    <li>This is the first thing</li>
+    <li>This is the second thing</li>
+    <li>This is the third thing</li>
+    </ol>
+    <ol>
+    <li>This is a second list</li>
+    </ol>`,
+    `This is a list of things:
+
+1. This is the first thing
+2. This is the second thing
+3. This is the third thing
+
+1. This is a second list`,
+    [],
+  ],
 ]
 
 test.each(scenarios)("converts %s", (_desc, input, output, mediaUrls) => {

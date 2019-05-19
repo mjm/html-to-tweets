@@ -30,6 +30,8 @@ class TweetHandler {
   urls: string[] = []
   linkedTwitterUser: string | null = null
   embeddedTweet: { url?: string } | null = null
+  listType: null | "ul" | "ol" = null
+  listItemCount: number = 0
 
   constructor(options: ConvertOptions) {
     this.options = options
@@ -75,6 +77,21 @@ class TweetHandler {
           }
         }
         break
+      case "ul":
+        this.listType = "ul"
+        break
+      case "ol":
+        this.listItemCount = 0
+        this.listType = "ol"
+        break
+      case "li":
+        if (this.listType === "ul") {
+          this.text += "• "
+        } else {
+          this.listItemCount++
+          this.text += `${this.listItemCount}. `
+        }
+        break
     }
   }
 
@@ -93,6 +110,9 @@ class TweetHandler {
         this.text += "\n\n"
         break
       case "br":
+      case "ul":
+      case "ol":
+      case "li":
         this.text += "\n"
         break
       case "a":
