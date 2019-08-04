@@ -5,8 +5,8 @@ import { ConvertResult } from "./convert"
 export function split(input: ConvertResult): Tweet[] {
   const [first, ...rest] = numberTweets(splitTweets(input.body))
   return [
-    { body: first, mediaURLs: input.mediaURLs },
-    ...rest.map(t => ({ body: t, mediaURLs: [] })),
+    { action: "tweet", body: first, mediaURLs: input.mediaURLs },
+    ...rest.map((t): Tweet => ({ action: "tweet", body: t, mediaURLs: [] })),
   ]
 }
 

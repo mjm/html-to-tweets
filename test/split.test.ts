@@ -6,12 +6,7 @@ test("does not split if tweet is short enough", () => {
     mediaURLs: [],
   }
 
-  expect(split(input)).toEqual([
-    {
-      body: input.body,
-      mediaURLs: [],
-    },
-  ])
+  expect(split(input)).toMatchSnapshot()
 })
 
 test("splits tweets along word boundaries", () => {
@@ -20,16 +15,7 @@ test("splits tweets along word boundaries", () => {
     mediaURLs: [],
   }
 
-  expect(split(input)).toEqual([
-    {
-      body: `${"abcd ".repeat(54)}(1/2)`,
-      mediaURLs: [],
-    },
-    {
-      body: `abcd abcd abcd (2/2)`,
-      mediaURLs: [],
-    },
-  ])
+  expect(split(input)).toMatchSnapshot()
 })
 
 // Eventually this behavior should change, but this is it for now
@@ -39,16 +25,7 @@ test("attaches all media URLs to the first tweet", () => {
     mediaURLs: ["https://example.com/foo.jpg", "https://example.com/bar.jpg"],
   }
 
-  expect(split(input)).toEqual([
-    {
-      body: `${"abcd ".repeat(54)}(1/2)`,
-      mediaURLs: ["https://example.com/foo.jpg", "https://example.com/bar.jpg"],
-    },
-    {
-      body: `abcd abcd abcd (2/2)`,
-      mediaURLs: [],
-    },
-  ])
+  expect(split(input)).toMatchSnapshot()
 })
 
 test("splits bacon ipsum", () => {
@@ -56,16 +33,5 @@ test("splits bacon ipsum", () => {
     "Bacon ipsum dolor amet andouille rump tongue flank leberkas tail shoulder picanha cupim turducken hamburger brisket. Bacon pastrami capicola, pork chop venison landjaeger rump swine doner kevin frankfurter chuck strip steak jerky. Pork belly kielbasa pork buffalo bresaola. Tenderloin fatback short ribs meatloaf. Meatloaf sausage biltong bacon turkey cow frankfurter. Frankfurter jerky drumstick doner, bacon sausage turducken alcatra pig fatback strip steak."
   const input = { body, mediaURLs: [] }
 
-  expect(split(input)).toEqual([
-    {
-      body:
-        "Bacon ipsum dolor amet andouille rump tongue flank leberkas tail shoulder picanha cupim turducken hamburger brisket. Bacon pastrami capicola, pork chop venison landjaeger rump swine doner kevin frankfurter chuck strip steak jerky. Pork belly kielbasa pork buffalo (1/2)",
-      mediaURLs: [],
-    },
-    {
-      body:
-        "bresaola. Tenderloin fatback short ribs meatloaf. Meatloaf sausage biltong bacon turkey cow frankfurter. Frankfurter jerky drumstick doner, bacon sausage turducken alcatra pig fatback strip steak. (2/2)",
-      mediaURLs: [],
-    },
-  ])
+  expect(split(input)).toMatchSnapshot()
 })

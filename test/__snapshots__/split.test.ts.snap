@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`attaches all media URLs to the first tweet 1`] = `
+Array [
+  Object {
+    "action": "tweet",
+    "body": "abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd (1/2)",
+    "mediaURLs": Array [
+      "https://example.com/foo.jpg",
+      "https://example.com/bar.jpg",
+    ],
+  },
+  Object {
+    "action": "tweet",
+    "body": "abcd abcd abcd (2/2)",
+    "mediaURLs": Array [],
+  },
+]
+`;
+
+exports[`does not split if tweet is short enough 1`] = `
+Array [
+  Object {
+    "action": "tweet",
+    "body": "abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd ",
+    "mediaURLs": Array [],
+  },
+]
+`;
+
+exports[`splits bacon ipsum 1`] = `
+Array [
+  Object {
+    "action": "tweet",
+    "body": "Bacon ipsum dolor amet andouille rump tongue flank leberkas tail shoulder picanha cupim turducken hamburger brisket. Bacon pastrami capicola, pork chop venison landjaeger rump swine doner kevin frankfurter chuck strip steak jerky. Pork belly kielbasa pork buffalo (1/2)",
+    "mediaURLs": Array [],
+  },
+  Object {
+    "action": "tweet",
+    "body": "bresaola. Tenderloin fatback short ribs meatloaf. Meatloaf sausage biltong bacon turkey cow frankfurter. Frankfurter jerky drumstick doner, bacon sausage turducken alcatra pig fatback strip steak. (2/2)",
+    "mediaURLs": Array [],
+  },
+]
+`;
+
+exports[`splits tweets along word boundaries 1`] = `
+Array [
+  Object {
+    "action": "tweet",
+    "body": "abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd abcd (1/2)",
+    "mediaURLs": Array [],
+  },
+  Object {
+    "action": "tweet",
+    "body": "abcd abcd abcd (2/2)",
+    "mediaURLs": Array [],
+  },
+]
+`;
